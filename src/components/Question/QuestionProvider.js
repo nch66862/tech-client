@@ -16,16 +16,16 @@ export const QuestionProvider = (props) => {
             .then(res => res.json())
             .then(res => setQuestion(res))
     }
-    const updateQuestion = (questionId) => {
-        return fetch(`http://localhost:8000/questions/${questionId}`, {
+    const updateQuestion = (question) => {
+        return fetch(`http://localhost:8000/questions/${question.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${localStorage.getItem("tech_token")}`
             },
+            body: JSON.stringify(question)
         })
-            .then(res => res.json())
-            .then(() => getQuestionById(questionId))
+            .then(() => getQuestionById(question.id))
     }
     const getTypes = () => {
         return fetch(`http://localhost:8000/types`, {

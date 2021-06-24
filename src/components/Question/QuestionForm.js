@@ -10,14 +10,15 @@ export const QuestionForm = ({ modal, toggleEditQuestion }) => {
         type_id: 0
     });
     const handleUpdateField = (event) => {
-        let newPriority = { ...editedQuestion }
-        newPriority[event.target.name] = event.target.value
-        setEditedQuestion(newPriority)
+        let newQuestion = { ...editedQuestion }
+        newQuestion[event.target.name] = event.target.value
+        setEditedQuestion(newQuestion)
+        console.log(newQuestion)
     }
     const handleUpdateRequired = (event) => {
-        let newPriority = { ...editedQuestion }
-        newPriority[event.target.name] = event.target.value
-        setEditedQuestion(newPriority)
+        let newQuestion = { ...editedQuestion }
+        newQuestion.required = event.target.checked
+        setEditedQuestion(newQuestion)
     }
     const handleSubmitEdit = (event) => {
         event.preventDefault()
@@ -31,6 +32,7 @@ export const QuestionForm = ({ modal, toggleEditQuestion }) => {
     useEffect(() => {
         getTypes()
         setEditedQuestion({
+            id: question.question.id,
             question_text: question.question.question_text,
             required: question.question.required,
             type_id: question.question.type.id
