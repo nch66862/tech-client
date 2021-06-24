@@ -3,7 +3,7 @@ import { Modal, ModalBody, ModalFooter, Button, Input, Form, FormGroup, Label } 
 import { QuestionContext } from "./QuestionProvider";
 
 export const QuestionForm = ({ modal, toggleEditQuestion }) => {
-    const { getQuestionById, updateQuestion, getTypes, types } = useContext(QuestionContext)
+    const { getQuestionById, updateQuestion, getTypes, types, question } = useContext(QuestionContext)
     const [editedQuestion, setEditedQuestion] = useState({
         question_text: "",
         required: null,
@@ -26,14 +26,18 @@ export const QuestionForm = ({ modal, toggleEditQuestion }) => {
     }
     useEffect(() => {
         getQuestionById(1)
-            .then(res => setEditedQuestion({
-                question_text: res.question.question_text,
-                required: res.question.required,
-                type_id: res.question.type.id
-            }))
-            .then(() => getTypes())
         // eslint-disable-next-line
     }, [])
+    useEffect(() => {
+        getTypes()
+        setEditedQuestion({
+            question_text: question.question.question_text,
+            required: question.question.required,
+            type_id: question.question.type.id
+        })
+        // eslint-disable-next-line
+    }, [question])
+
     return (
         <>
             <Modal isOpen={modal} toggle={toggleEditQuestion}>

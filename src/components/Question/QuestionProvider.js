@@ -4,6 +4,7 @@ export const QuestionContext = createContext()
 
 export const QuestionProvider = (props) => {
     const [types, setTypes] = useState([])
+    const [question, setQuestion] = useState({})
     const getQuestionById = (questionId) => {
         return fetch(`http://localhost:8000/questions/${questionId}`, {
             method: "GET",
@@ -13,6 +14,18 @@ export const QuestionProvider = (props) => {
             },
         })
             .then(res => res.json())
+            .then(res => setQuestion(res))
+    }
+    const updateQuestion = (questionId) => {
+        return fetch(`http://localhost:8000/questions/${questionId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("tech_token")}`
+            },
+        })
+            .then(res => res.json())
+            .then(() => getQuestionById(questionId))
     }
     const getTypes = () => {
         return fetch(`http://localhost:8000/types`, {
@@ -28,7 +41,8 @@ export const QuestionProvider = (props) => {
     return (
         <QuestionContext.Provider value={{
             getQuestionById, types,
-            getTypes
+            getTypes, question,
+            updateQuestion
         }}>
             {props.children}
         </QuestionContext.Provider>
