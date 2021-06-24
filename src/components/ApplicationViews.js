@@ -1,6 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { Profile } from "./profile/Profile"
+import { Question } from "./Question/Question"
+import { QuestionProvider } from "./Question/QuestionProvider"
 
 export const ApplicationViews = () => {
     return <>
@@ -8,9 +9,11 @@ export const ApplicationViews = () => {
             margin: "1rem 2rem",
             lineHeight: "1.75rem"
         }}>
-            <Route exact path="/">
-                <Profile />
-            </Route>
+            <QuestionProvider>
+                <Route exact path="/">
+                    <Question />
+                </Route>
+            </QuestionProvider>
         </main>
     </>
 }

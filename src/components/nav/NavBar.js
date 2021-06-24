@@ -14,18 +14,11 @@ export const NavBar = () => {
         <div className="navBarSection">
             <Navbar color="black">
                 <NavbarBrand href="/">Tech</NavbarBrand>
-                <NavItem className="navItem">
-                    <NavLink onClick={() => history.push("/community")}><div className="navText">Community</div></NavLink>
-                </NavItem>
                 {(localStorage.getItem("tech_token") !== null) && (
                     <>
                         <UncontrolledDropdown nav inNavbar className="navItem">
                             <DropdownToggle nav caret>Profile</DropdownToggle>
                             <DropdownMenu right>
-                                <DropdownItem>
-                                    <div className="navText">Change your visibility</div>
-                                </DropdownItem>
-                                <DropdownItem divider />
                                 <DropdownItem onClick={handleLogout}>
                                     <div className="navText">Logout</div>
                                 </DropdownItem>
