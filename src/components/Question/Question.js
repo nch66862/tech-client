@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react"
 import './Question.css'
 import { QuestionContext } from "./QuestionProvider"
 import { Button } from 'reactstrap';
+import { QuestionForm } from './QuestionForm'
 
 
 //just a container for a footer for completeness
@@ -27,6 +28,7 @@ export const Question = () => {
                 })}
             </section>
             <Button color="primary" className="inputTimeButton" onClick={toggleEditQuestion}>Edit</Button>
+            {modal && <QuestionForm toggleEditQuestion={toggleEditQuestion} modal={modal} />}
         </>
     )
 }

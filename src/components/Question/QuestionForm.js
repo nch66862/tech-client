@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react"
-import { Modal, ModalBody, ModalFooter, Button, Input, Form, FormGroup } from "reactstrap"
+import { Modal, ModalBody, ModalFooter, Button, Input, Form, FormGroup, Label } from "reactstrap"
 import { QuestionContext } from "./QuestionProvider";
 
-export const QuestionModal = ({ priorityModal, togglePriorityModal }) => {
+export const QuestionForm = ({ modal, toggleEditQuestion }) => {
     const { getQuestionById, updateQuestion, getTypes, types } = useContext(QuestionContext)
     const [editedQuestion, setEditedQuestion] = useState({
         question_text: "",
@@ -26,13 +26,17 @@ export const QuestionModal = ({ priorityModal, togglePriorityModal }) => {
     }
     useEffect(() => {
         getQuestionById(1)
-            .then(res => setEditedQuestion(res))
+            .then(res => setEditedQuestion({
+                question_text: res.question.question_text,
+                required: res.question.required,
+                type_id: res.question.type.id
+            }))
             .then(() => getTypes())
         // eslint-disable-next-line
     }, [])
     return (
         <>
-            <Modal isOpen={priorityModal} toggle={togglePriorityModal}>
+            <Modal isOpen={modal} toggle={toggleEditQuestion}>
                 <ModalBody>
                     <Form>
                         <FormGroup>
@@ -44,7 +48,8 @@ export const QuestionModal = ({ priorityModal, togglePriorityModal }) => {
                             <Input name="required" type="checkbox" onChange={handleUpdateRequired} value={editedQuestion?.required} defaultChecked={editedQuestion?.required} />
                         </FormGroup>
                         <FormGroup>
-                            <Input type="select" name="type_id" onChange={handleUpdateField}>
+                            <Input type="select" name="type_id" onChange={handleUpdateField} value={editedQuestion?.type_id}>
+                                <option value="0">Select A Type...</option>
                                 {types.map(type => {
                                     return <option value={type.id}>{type.type}</option>
                                 })}
@@ -54,7 +59,7 @@ export const QuestionModal = ({ priorityModal, togglePriorityModal }) => {
                 </ModalBody>
                 <ModalFooter>
                     <Button color="secondary" onClick={handleSubmitEdit}>Save</Button>
-                    <Button color="secondary" onClick={togglePriorityModal}>Cancel</Button>
+                    <Button color="secondary" onClick={toggleEditQuestion}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         </>
