@@ -11,8 +11,11 @@ export const Question = () => {
             .then(res => setQuestion(res))
     }, [])
     return (
-        <section className="profile">
-            {question.question.question_text}
+        <section className="question">
+            <h2>{question.question?.question_text}</h2>
+            {question.question?.answer_values.map((answer, index) => {
+                return <article key={index}>{answer}</article>
+            })}
         </section>
     )
 }
