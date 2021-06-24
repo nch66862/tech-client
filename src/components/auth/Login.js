@@ -61,7 +61,7 @@ export const Login = () => {
         <main className="container--login centered">
             <h1>Technology Advice</h1>
             <section>
-                <Button color="primary" onClick={handleDefaultLogin} className="loginButton btn signInButton" type="submit">Sign in</Button>
+                <Button color="primary" onClick={handleDefaultLogin} className="loginButton btn signInButton" type="submit">easy sign in</Button>
             </section>
             <section>
                 or
