@@ -1,0 +1,48 @@
+.navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+}
+
+.navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+}
+
+.navbar__link {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.navbar__logo {
+    max-height: 6rem;
+}
+
+.navItem {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.navText {
+    color: black;
+}
+
+.arrowBesideMenuItem {
+    display: flex;
+}
+
+.navBarSection {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.croppedLogo {
+    width: 200px; /* width of container */
+    height: 50px; /* height of container */
+    object-fit: cover;
+    object-position: 50% 47%; /* try 20px 10px */ 
+}
+
+.croppedLogo img {
+    margin: -10px 0px 0px -180px;
+}

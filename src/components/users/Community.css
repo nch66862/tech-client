@@ -1,0 +1,10 @@
+.communityProfileListItem:hover {
+    cursor: pointer;
+    color: lightskyblue;
+}
+
+.flexSubscribeButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
